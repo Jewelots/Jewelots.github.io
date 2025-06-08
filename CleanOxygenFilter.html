@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Draggable TDs</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400;1,700&amp;family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&amp;family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet">
+  <style>
+	/* 1. Use a more-intuitive box-sizing model */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+/* 2. Remove default margin */
+* {
+  margin: 0;
+}
+/* 3. Enable keyword animations */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+body {
+  /* 4. Add accessible line-height */
+  line-height: 1.5;
+  /* 5. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+}
+/* 6. Improve media defaults */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+/* 7. Inherit fonts for form controls */
+input, button, textarea, select {
+  font: inherit;
+}
+/* 8. Avoid text overflows */
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+/* 9. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+/*
+  10. Create a root stacking context
+*/
+#root, #__next {
+  isolation: isolate;
+}
+    table {
+      border-spacing: 1px;
+    }
+    td {
+      border: 1px solid black;
+      padding: 10px;
+      cursor: move;
+      user-select: none;
+    }
+    .dragging {
+      opacity: 0.5;
+    }
+	
+	td {
+		border: solid 1px black;
+		width: 8px;
+		font-family: 'IBM Plex Mono';
+		font-weight: bold;
+		display: table-cell;
+		vertical-align: center;
+		padding: 4px;
+	}
+	
+	
+  </style>
+</head>
+<body style="padding:50px;">
+  <table>
+    <tr class="draggable-row">
+		<td draggable="false" style="color:blue; border:none;">Q<br>K<br>S</td>
+		<td draggable="true">A<br>S<br>T</td>
+		<td draggable="true">E<br>I<br>I</td>
+		<td draggable="true">E<br>L<br>P</td>
+		<td draggable="true">E<br>W<br>R</td>
+		<td draggable="true">G<br>E<br>N</td>
+		<td draggable="true">I<br>K<br>O</td>
+		<td draggable="true">I<br>S<br>O</td>
+		<td draggable="true">L<br>N<br>H</td>
+		<td draggable="true">M<br>A<br>S</td>
+		<td draggable="true">N<br>A<br>G</td>
+		<td draggable="true">N<br>E<br>I</td>
+		<td draggable="true">N<br>S<br>N</td>
+		<td draggable="true">P<br>P<br>G</td>
+		<td draggable="true">U<br>I<br>T</td>
+		<td draggable="true">U<br>N<br>T</td>
+    </tr>
+  </table>
+  <br/>
+  <table>
+	<tr class="draggable-row">
+		<td draggable="false" style="color:blue; border:none;">J<br>C<br>E</td>
+		<td draggable="true">A<br>X<br>N</td>
+		<td draggable="true">C<br>Y<br>A</td>
+		<td draggable="true">E<br>H<br>I</td>
+		<td draggable="true">E<br>I<br>O</td>
+		<td draggable="true">E<br>R<br>H</td>
+		<td draggable="true">E<br>T<br>S</td>
+		<td draggable="true">I<br>T<br>R</td>
+		<td draggable="true">K<br>R<br>U</td>
+		<td draggable="true">L<br>N<br>A</td>
+		<td draggable="true">M<br>S<br>T</td>
+		<td draggable="true">N<br>I<br>A</td>
+		<td draggable="true">N<br>L<br>G</td>
+		<td draggable="true">O<br>U<br>M</td>
+		<td draggable="true">R<br>A<br>E</td>
+		<td draggable="true">Y<br>C<br>T</td>
+	</tr>
+  </table>
+  <br/>
+  <table>
+	<tr class="draggable-row">
+		<td draggable="false" style="color:blue; border:none;">Q<br>O<br>A</td>
+		<td draggable="true">A<br>E<br>I</td>
+		<td draggable="true">A<br>H<br>N</td>
+		<td draggable="true">A<br>I<br>Y</td>
+		<td draggable="true">B<br>C<br>D</td>
+		<td draggable="true">C<br>N<br>E</td>
+		<td draggable="true">D<br>R<br>D</td>
+		<td draggable="true">E<br>B<br>D</td>
+		<td draggable="true">E<br>E<br>R</td>
+		<td draggable="true">I<br>T<br>E</td>
+		<td draggable="true">N<br>L<br>E</td>
+		<td draggable="true">N<br>V<br>R</td>
+		<td draggable="true">O<br>I<br>I</td>
+		<td draggable="true">T<br>R<br>K</td>
+		<td draggable="true">U<br>A<br>L</td>
+		<td draggable="true">U<br>S<br>C</td>
+	</tr>
+  </table>
+
+  <script>
+    const rows = document.getElementsByClassName('draggable-row');
+    let draggedTd = null;
+	let sourceTable = null;
+
+	for (const row of rows)
+	{
+		const placeholder = document.createElement('td');
+		placeholder.classList.add('placeholder');
+		placeholder.innerHTML = '&nbsp;';
+		placeholder.style.border = 'none';
+
+		row.querySelectorAll('td').forEach(td => {
+		  td.addEventListener('dragstart', (e) => {
+			draggedTd = td;
+			sourceTable = td.parentElement;
+			td.classList.add('dragging');
+			e.dataTransfer.effectAllowed = 'move';
+			placeholder.style.width = `${td.offsetWidth}px`;
+			placeholder.style.height = `${td.offsetHeight}px`;
+			setTimeout(() => {
+			  td.style.display = 'none';
+			}, 0);
+		  });
+
+		  td.addEventListener('dragend', () => {
+			draggedTd.classList.remove('dragging');
+			draggedTd.style.display = '';
+			if (placeholder.parentNode) {
+			  placeholder.parentNode.replaceChild(draggedTd, placeholder);
+			}
+			draggedTd = null;
+			sourceTable = null;
+		  });
+
+		  td.addEventListener('dragover', (e) => {
+			e.preventDefault();
+			if (!draggedTd || td === draggedTd || sourceTable !== td.parentElement || td.getAttribute('draggable') == "false") return;
+
+			const rect = td.getBoundingClientRect();
+			const before = e.clientX < rect.left + rect.width / 2;
+
+			if (before) {
+			  if (row.children.length > 1 && row.children[0] !== placeholder) {
+				row.insertBefore(placeholder, td);
+			  } else if (td.previousSibling !== placeholder) {
+				row.insertBefore(placeholder, td);
+			  }
+			} else {
+			  if (td.nextSibling !== placeholder) {
+				row.insertBefore(placeholder, td.nextSibling);
+			  }
+			}
+		  });
+
+		  td.addEventListener('drop', (e) => {
+			e.preventDefault();
+		  });
+		});
+	}
+  </script>
+</body>
+</html>
