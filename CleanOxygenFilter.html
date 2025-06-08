@@ -163,6 +163,20 @@ h1, h2, h3, h4, h5, h6 {
 			placeholder.style.height = `${td.offsetHeight}px`;
 			setTimeout(() => {
 			  td.style.display = 'none';
+			  const rect = td.getBoundingClientRect();
+			  const before = e.clientX < rect.left + rect.width / 2;
+              
+			  if (before) {
+			    if (row.children.length > 1 && row.children[0] !== placeholder) {
+			  	row.insertBefore(placeholder, td);
+			    } else if (td.previousSibling !== placeholder) {
+			  	row.insertBefore(placeholder, td);
+			    }
+			  } else {
+			    if (td.nextSibling !== placeholder) {
+			  	row.insertBefore(placeholder, td.nextSibling);
+			    }
+			  }
 			}, 0);
 		  });
 
